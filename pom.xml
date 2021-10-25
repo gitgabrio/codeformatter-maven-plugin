@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss</groupId>
+        <artifactId>jboss-parent</artifactId>
+        <version>38</version>
+    </parent>
+
+    <groupId>org.kie</groupId>
+    <artifactId>kie-codeformatter-maven-plugin</artifactId>
+    <version>1.0-FINAL</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>KIE :: Kie Code Formatter Maven Plugin</name>
+    <description>Plugin to automatically format changed code</description>
+    <url>https://github.com/kiegroup/kie-codeformatter-maven-plugin</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>All developers are listed on the team website</name>
+            <url>http://www.drools.org/community/team.html</url>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>All contributors are listed on the team website</name>
+            <url>http://www.drools.org/community/team.html</url>
+        </contributor>
+    </contributors>
+
+    <prerequisites>
+        <maven>${version.maven.required}</maven>
+    </prerequisites>
+
+    <properties>
+        <version.maven.required>3.6.1</version.maven.required>
+        <version.mojo-executor>2.3.0</version.mojo-executor>
+        <version.maven-scm-plugin>1.12.0</version.maven-scm-plugin>
+        <version.formatter-maven-plugin>2.16.0</version.formatter-maven-plugin>
+        <version.impsort-maven-plugin>1.5.0</version.impsort-maven-plugin>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <scm>
+        <connection>scm:git:https://github.com:kiegroup/kie-codeformatter-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:kiegroup/kie-codeformatter-maven-plugin.git</developerConnection>
+        <url>https://github.com/kiegroup/kie-codeformatter-maven-plugin</url>
+        <tag>1.1</tag>
+    </scm>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>https://issues.jboss.org/browse/DROOLS</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://jenkins-kieci.rhcloud.com</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>jboss-releases-repository</id>
+            <name>JBoss Releases Repository</name>
+            <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>jboss-snapshots-repository</id>
+            <name>JBoss Snapshots Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Maven dependencies -->
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-core</artifactId>
+                <version>${version.maven.required}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>${version.maven.required}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${version.maven.required}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- Plugin invocations -->
+            <dependency>
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>mojo-executor</artifactId>
+                <version>${version.mojo-executor}</version>
+            </dependency>
+            <!-- GIT interaction -->
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>${version.maven-scm-plugin}</version>
+            </dependency>
+            <!-- File formatting -->
+            <dependency>
+                <groupId>net.revelc.code.formatter</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+                <version>${version.formatter-maven-plugin}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.revelc.code</groupId>
+                <artifactId>impsort-maven-plugin</artifactId>
+                <version>${version.impsort-maven-plugin}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Maven dependencies -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Plugin invocations -->
+        <dependency>
+            <groupId>org.twdata.maven</groupId>
+            <artifactId>mojo-executor</artifactId>
+        </dependency>
+        <!-- GIT interaction -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-scm-plugin</artifactId>
+        </dependency>
+        <!-- File formatting -->
+        <dependency>
+            <groupId>net.revelc.code.formatter</groupId>
+            <artifactId>formatter-maven-plugin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.revelc.code</groupId>
+            <artifactId>impsort-maven-plugin</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>
