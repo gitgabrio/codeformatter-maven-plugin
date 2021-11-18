@@ -48,7 +48,8 @@ public class SCMHelper {
                 goal(DIFF_GOAL), configuration(element(name(CONNECTIONTYPE_CONFIG), DEVELOPERCONNECTION)),
                 executionEnvironment(mavenProject, mavenSession, pluginManager));
         String diffFileName = mavenProject.getArtifactId() + ".diff";
-        File diffFile = new File(diffFileName);
+        String fullDiffPath = mavenProject.getBasedir().getPath() + File.separator + diffFileName;
+        File diffFile = new File(fullDiffPath);
         return new ArrayList<>(getModifiedFiles(diffFile, log));
 
     }
