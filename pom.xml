@@ -10,14 +10,14 @@
         <version>38</version>
     </parent>
 
-    <groupId>org.kie</groupId>
-    <artifactId>kie-codeformatter-maven-plugin</artifactId>
+    <groupId>net.cardosi</groupId>
+    <artifactId>codeformatter-maven-plugin</artifactId>
     <version>1.0-FINAL</version>
     <packaging>maven-plugin</packaging>
 
-    <name>KIE :: Kie Code Formatter Maven Plugin</name>
+    <name>Code Formatter Maven Plugin</name>
     <description>Plugin to automatically format changed code</description>
-    <url>https://github.com/kiegroup/kie-codeformatter-maven-plugin</url>
+    <url>https://github.com/gitgabrio/codeformatter-maven-plugin</url>
 
     <licenses>
         <license>
@@ -55,9 +55,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com:kiegroup/kie-codeformatter-maven-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:kiegroup/kie-codeformatter-maven-plugin.git</developerConnection>
-        <url>https://github.com/kiegroup/kie-codeformatter-maven-plugin</url>
+        <connection>scm:git:https://github.com:gitgabrio/codeformatter-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:gitgabrio/codeformatter-maven-plugin.git</developerConnection>
+        <url>https://github.com/gitgabrio/codeformatter-maven-plugin</url>
         <tag>1.1</tag>
     </scm>
 

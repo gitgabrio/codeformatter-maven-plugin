@@ -1,4 +1,4 @@
-# kie-codeformatter-maven-plugin
+# codeformatter-maven-plugin
 
 Maven plugin to automatically format changed code.
 
@@ -44,7 +44,7 @@ An example pom configuration could be:
     </properties>
 
 
-    <name>Kie-code-formatter Sample Project</name>
+    <name>Code-formatter Sample Project</name>
     <url>http://somecompany.com</url>
     <scm>
         <connection>(PROJECT_SPECIFIC)</connection>
@@ -55,8 +55,8 @@ An example pom configuration could be:
     <build>
         <plugins>
             <plugin>
-                <groupId>org.kie</groupId>
-                <artifactId>kie-codeformatter-maven-plugin</artifactId>
+                <groupId>net.cardosi</groupId>
+                <artifactId>codeformatter-maven-plugin</artifactId>
                 <version>1.0-FINAL</version>
                 <configuration>
                     <!-- Formatter -->
@@ -105,7 +105,7 @@ E.g.
 Give it a try
 ============
 
-1. locally checkout the kie-codeformatter-maven-plugin repo
+1. locally checkout the codeformatter-maven-plugin repo
 2. switch to `main` branch
 3. `mvn clean install` it
 4. create a "testing" project with configuration similar to the one provided above

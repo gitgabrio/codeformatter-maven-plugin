@@ -1,19 +1,5 @@
-/*
- * Copyright 2021 Red Hat, Inc. and/or its affiliates.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package org.kie.maven.codeformatter.plugin;
+
+package net.cardosi.maven.codeformatter.plugin;
 
 import org.apache.maven.plugin.PluginParameterExpressionEvaluator;
 import org.apache.maven.plugin.logging.Log;
@@ -22,8 +8,10 @@ import org.codehaus.plexus.configuration.PlexusConfiguration;
 import org.twdata.maven.mojoexecutor.MojoExecutor;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -108,16 +96,15 @@ public class ConfigurationHelper {
                                                       final PluginParameterExpressionEvaluator expressionEvaluator,
                                                       final Log log) throws ExpressionEvaluationException {
         log.info("Executing getConfigurationElements");
-        MojoExecutor.Element[] toReturn = new MojoExecutor.Element[plexusConfigurations.size()];
-        for (int i = 0; i < toReturn.length; i++) {
-            PlexusConfiguration plexusConfiguration = plexusConfigurations.get(i);
+        List<MojoExecutor.Element> tmpList = new ArrayList<>();
+        for (PlexusConfiguration plexusConfiguration : plexusConfigurations) {
             if (plexusConfiguration.getName().equals(INCLUDES)) {
-                toReturn[i] = includes;
+                tmpList.add(includes);
             } else {
-                toReturn[i] = getElement(plexusConfiguration, expressionEvaluator, log);
+                getElement(plexusConfiguration, expressionEvaluator, log).ifPresent(tmpList::add);
             }
         }
-        return toReturn;
+        return tmpList.toArray(new Element[0]);
     }
 
     public static Element getIncludesElement(final List<File> files,
@@ -130,15 +117,15 @@ public class ConfigurationHelper {
         return element(name(INCLUDES), children);
     }
 
-    private static Element getElement(final PlexusConfiguration plexusConfiguration,
-                                      final PluginParameterExpressionEvaluator expressionEvaluator,
-                                      final Log log) throws ExpressionEvaluationException {
+    private static Optional<Element> getElement(final PlexusConfiguration plexusConfiguration,
+                                                final PluginParameterExpressionEvaluator expressionEvaluator,
+                                                final Log log) throws ExpressionEvaluationException {
         log.debug("getElement " + plexusConfiguration);
         String value = plexusConfiguration.getValue();
         String defaultValue = plexusConfiguration.getAttribute("default-value");
         String configurationName = plexusConfiguration.getName();
         String evaluated = defaultIfNull(expressionEvaluator.evaluate(defaultIfBlank(value, defaultValue)), "").toString();
-        return element(name(configurationName), evaluated);
+        return evaluated.isEmpty() ? Optional.empty() : Optional.of(element(name(configurationName), evaluated));
     }
 
     private static List<PlexusConfiguration> getPlexusConfigurations(final PlexusConfiguration pomConfiguration,
